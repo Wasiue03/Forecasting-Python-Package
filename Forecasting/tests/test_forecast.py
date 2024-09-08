@@ -1,7 +1,7 @@
 # tests/test_forecast.py
 import pytest
 import pandas as pd
-from forecast import forecast_arima, forecast_sarima, forecast_exponential_smoothing
+from time_series.forecast import forecast_arima, forecast_sarima, forecast_exponential_smoothing
 
 
 @pytest.fixture
