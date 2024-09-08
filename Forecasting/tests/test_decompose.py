@@ -1,6 +1,6 @@
 import pytest
 import pandas as pd
-from time_series.decompose import decompose_series
+from decompose import decompose_series
 
 @pytest.fixture
 def time_series_data():
