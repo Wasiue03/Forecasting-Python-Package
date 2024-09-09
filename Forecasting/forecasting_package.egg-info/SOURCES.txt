@@ -1,0 +1,10 @@
+README.md
+setup.py
+Forecasting/__init__.py
+Forecasting/forecast.py
+forecasting_package.egg-info/PKG-INFO
+forecasting_package.egg-info/SOURCES.txt
+forecasting_package.egg-info/dependency_links.txt
+forecasting_package.egg-info/entry_points.txt
+forecasting_package.egg-info/requires.txt
+forecasting_package.egg-info/top_level.txt

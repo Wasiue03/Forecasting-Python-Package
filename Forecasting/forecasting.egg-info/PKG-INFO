@@ -1,0 +1,26 @@
+Metadata-Version: 2.1
+Name: forecasting
+Version: 0.1
+Summary: A package for time series forecasting using ARIMA, SARIMA, and Exponential Smoothing
+Home-page: https://github.com/Wasiue03/Forecasting-Python-Package
+Author: Abdul Wasiue
+Author-email: abdulwasiueunk@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+
+# Forecasting Package
+
+This package provides time series forecasting capabilities using ARIMA, SARIMA, and Exponential Smoothing models.
+
+## Installation
+
+You can install the package using pip:
+
+```bash
+pip install git+https://github.com/Wasiue03/Forecasting-Python-Package.git
+
+

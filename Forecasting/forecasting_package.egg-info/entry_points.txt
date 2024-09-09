@@ -1,0 +1,3 @@
+[console_scripts]
+forecasting = forecasting.forecast:main_forecasting
+

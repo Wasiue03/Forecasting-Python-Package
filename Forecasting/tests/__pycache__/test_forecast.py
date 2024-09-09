@@ -1,6 +1,6 @@
 import pytest
 import pandas as pd
-from Forecasting.forecast import forecast_arima, forecast_sarima, forecast_exponential_smoothing
+from Forecasting.Forecasting.forecast import forecast_arima, forecast_sarima, forecast_exponential_smoothing
 
 @pytest.fixture
 def time_series_data():
