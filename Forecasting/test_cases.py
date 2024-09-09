@@ -57,11 +57,4 @@ def test_forecast_exponential_smoothing_optimize():
     series = main_forecasting(test_csv, test_column, model_type='exponential_smoothing', steps=5, optimize=True)
     assert len(series) == 5, "The forecast length should match the requested steps."
 
-# @pytest.fixture(scope='module', autouse=True)
-# def teardown_module():
-#     # Clean up the test CSV file
-#     if os.path.exists(test_csv):
-#         os.remove(test_csv)
-#     # Clean up any created directories
-#     if os.path.exists(data_directory):
-#         os.rmdir(data_directory)
+

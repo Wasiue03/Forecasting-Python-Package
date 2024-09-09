@@ -37,7 +37,7 @@ def optimize_arima(series, steps=1):
             forecast = model_fit.forecast(steps=steps)
             return mean_squared_error(test, forecast)
         except Exception as e:
-            return float('inf')  # Return a high value for invalid parameter combinations
+            return float('inf')  
     
     study = optuna.create_study(direction='minimize')
     study.optimize(objective, n_trials=30)
