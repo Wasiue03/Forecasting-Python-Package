@@ -1,6 +1,6 @@
 import unittest
 import os
-from Forecasting.Forecasting.forecast import main_forecasting, load_dataset, forecast_arima, plot_forecast, forecast_sarima
+from Forecasting.forecast import main_forecasting, load_dataset, forecast_arima, plot_forecast, forecast_sarima
 import pandas as pd
 class TestForecasting(unittest.TestCase):
 

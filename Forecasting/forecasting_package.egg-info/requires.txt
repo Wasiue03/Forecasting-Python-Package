@@ -1,6 +1,0 @@
-pandas
-statsmodels
-optuna
-matplotlib
-numpy
-scikit-learn

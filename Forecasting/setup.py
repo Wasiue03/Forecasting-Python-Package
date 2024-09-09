@@ -7,7 +7,7 @@ def read_readme():
         return f.read()
 
 setup(
-    name='forecasting_package',
+    name='forecastify',
     version='0.1',
     packages=find_packages(),
     install_requires=[

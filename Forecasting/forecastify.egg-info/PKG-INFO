@@ -1,5 +1,5 @@
 Metadata-Version: 2.1
-Name: forecasting-package
+Name: forecastify
 Version: 0.1
 Summary: A package for time series forecasting using ARIMA, SARIMA, and Exponential Smoothing
 Home-page: https://github.com/Wasiue03/Forecasting-Python-Package
