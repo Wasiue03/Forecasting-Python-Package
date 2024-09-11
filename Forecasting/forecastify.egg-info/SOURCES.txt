@@ -1,0 +1,10 @@
+README.md
+setup.py
+Forecasting/__init__.py
+Forecasting/forecast.py
+forecastify.egg-info/PKG-INFO
+forecastify.egg-info/SOURCES.txt
+forecastify.egg-info/dependency_links.txt
+forecastify.egg-info/entry_points.txt
+forecastify.egg-info/requires.txt
+forecastify.egg-info/top_level.txt

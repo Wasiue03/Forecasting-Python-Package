@@ -6,8 +6,8 @@ from statsmodels.tsa.holtwinters import ExponentialSmoothing
 from sklearn.metrics import mean_squared_error
 import numpy as np
 import os
+import matplotlib.pyplot as plt
 
-# Function to load and process a dataset
 def load_dataset(file_path, column_name):
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"File '{file_path}' not found.")
@@ -21,6 +21,26 @@ def load_dataset(file_path, column_name):
         return series
     except Exception as e:
         raise ValueError(f"Error loading the dataset: {e}")
+
+import matplotlib.pyplot as plt
+
+import matplotlib.pyplot as plt
+
+def plot_forecast(series, forecast_series, title='Forecast', forecast_label='Forecast', save_path=None):
+    plt.figure(figsize=(10, 6))
+    plt.plot(series, label='Actual Data')
+    plt.plot(forecast_series.index, forecast_series, label=forecast_label, color='red')
+    plt.title(title)
+    plt.xlabel('Time')
+    plt.ylabel('Value')
+    plt.legend()
+    
+    if save_path:
+        plt.savefig(save_path)  
+        plt.close()  
+    if not save_path or not os.path.exists(save_path):
+        plt.show()  
+
 
 # ARIMA forecasting function with optimization using Optuna
 def optimize_arima(series, steps=1):
@@ -45,15 +65,21 @@ def optimize_arima(series, steps=1):
     best_order = (best_params['p'], best_params['d'], best_params['q'])
     return ARIMA(series, order=best_order).fit()
 
-def forecast_arima(series, steps=1, optimize=False):
+def forecast_arima(series, steps=1, optimize=False, plot=False, plot_path=None):
     if optimize:
         model_fit = optimize_arima(series, steps)
     else:
         model_fit = ARIMA(series, order=(1, 1, 1)).fit()
+    
     forecast = model_fit.forecast(steps=steps)
-    return pd.Series(forecast, name='Forecast')
+    forecast_series = pd.Series(forecast, name='Forecast')
+    
+    if plot:
+        plot_forecast(series, forecast_series, title='ARIMA Forecast', save_path=plot_path)
 
-# SARIMA optimization
+    return forecast_series
+
+# SARIMA forecasting function with optimization
 def optimize_sarima(series, steps=1):
     def objective(trial):
         p = trial.suggest_int('p', 0, 5)
@@ -95,7 +121,7 @@ def optimize_sarima(series, steps=1):
     
     return SARIMAX(series, order=best_order, seasonal_order=best_seasonal_order).fit()
 
-def forecast_sarima(series, steps=1, optimize=False):
+def forecast_sarima(series, steps=1, optimize=False, plot=False, plot_path=None):
     if optimize:
         model_fit = optimize_sarima(series, steps)
     else:
@@ -107,14 +133,17 @@ def forecast_sarima(series, steps=1, optimize=False):
     
     try:
         forecast = model_fit.forecast(steps=steps)
-        if np.isscalar(forecast) or forecast.ndim == 0:
-            forecast = [forecast] * steps
-        return pd.Series(forecast, name='Forecast')
+        forecast_series = pd.Series(forecast, name='Forecast')
+        
+        if plot:
+            plot_forecast(series, forecast_series, title='SARIMA Forecast', save_path=plot_path)
+
+        return forecast_series
     except IndexError as e:
         print(f"IndexError encountered during forecasting: {e}")
         return pd.Series([None] * steps, name='Forecast')
 
-# Exponential Smoothing optimization
+# Exponential Smoothing forecasting function with optimization
 def optimize_exponential_smoothing(series, steps=1):
     def objective(trial):
         seasonal = trial.suggest_categorical('seasonal', ['add', 'mul'])
@@ -135,7 +164,7 @@ def optimize_exponential_smoothing(series, steps=1):
     return ExponentialSmoothing(series, seasonal=best_params['seasonal'], 
                                 seasonal_periods=best_params['seasonal_periods']).fit()
 
-def forecast_exponential_smoothing(series, steps=1, optimize=False):
+def forecast_exponential_smoothing(series, steps=1, optimize=False, plot=False, plot_path=None):
     if optimize:
         model_fit = optimize_exponential_smoothing(series, steps)
     else:
@@ -143,18 +172,24 @@ def forecast_exponential_smoothing(series, steps=1, optimize=False):
             print("Insufficient data for seasonal Exponential Smoothing.")
             return pd.Series([None] * steps, name='Forecast')
         model_fit = ExponentialSmoothing(series, seasonal='add', seasonal_periods=12).fit()
+    
     forecast = model_fit.forecast(steps=steps)
-    return pd.Series(forecast, name='Forecast')
+    forecast_series = pd.Series(forecast, name='Forecast')
+    
+    if plot:
+        plot_forecast(series, forecast_series, title='Exponential Smoothing Forecast', save_path=plot_path)
+
+    return forecast_series
 
 # Main function for forecasting
-def main_forecasting(file_path, column_name, model_type='arima', steps=1, optimize=False):
+def main_forecasting(file_path, column_name, model_type='arima', steps=1, optimize=False, plot=False, plot_path=None):
     series = load_dataset(file_path, column_name)
 
     if model_type == 'arima':
-        return forecast_arima(series, steps=steps, optimize=optimize)
+        return forecast_arima(series, steps=steps, optimize=optimize, plot=plot, plot_path=plot_path)
     elif model_type == 'sarima':
-        return forecast_sarima(series, steps=steps, optimize=optimize)
+        return forecast_sarima(series, steps=steps, optimize=optimize, plot=plot, plot_path=plot_path)
     elif model_type == 'exponential_smoothing':
-        return forecast_exponential_smoothing(series, steps=steps, optimize=optimize)
+        return forecast_exponential_smoothing(series, steps=steps, optimize=optimize, plot=plot, plot_path=plot_path)
     else:
         raise ValueError(f"Unknown model_type: {model_type}. Choose from 'arima', 'sarima', or 'exponential_smoothing'.")

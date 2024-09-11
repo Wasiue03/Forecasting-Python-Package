@@ -1,0 +1,75 @@
+Metadata-Version: 2.1
+Name: forecastify
+Version: 0.1
+Summary: A package for time series forecasting using ARIMA, SARIMA, and Exponential Smoothing
+Home-page: https://github.com/Wasiue03/Forecasting-Python-Package
+Author: Abdul Wasiue
+Author-email: abdulwasiueunk@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+
+# Forecasting Package
+
+The Forecasting Package provides robust time series forecasting capabilities using ARIMA, SARIMA, and Exponential Smoothing models. It includes functionalities for model optimization using Optuna and visualizing forecasts with Matplotlib.
+
+## Features
+
+- **ARIMA**: Autoregressive Integrated Moving Average model for forecasting.
+- **SARIMA**: Seasonal ARIMA model for handling seasonal patterns in time series data.
+- **Exponential Smoothing**: Includes options for additive and multiplicative seasonal effects.
+- **Model Optimization**: Use Optuna to find the best hyperparameters for your models.
+- **Visualization**: Generate and save plots of the forecasted data.
+
+## Installation
+
+To install the package, use pip: 
+
+```bash
+pip install git+https://github.com/Wasiue03/Forecasting-Python-Package.git
+
+"""
+Usage
+from forecasting.forecast import main_forecasting'
+
+forecast_series = main_forecasting(
+    file_path='path/to/your/data.csv',
+    column_name='your_column',
+    model_type='arima',
+    steps=10,
+    optimize=True,
+    plot=True,
+    plot_path='arima_forecast.png'
+)
+
+
+forecast_series = main_forecasting(
+    file_path='data/metrics.csv',
+    column_name='value',
+    model_type='sarima',
+    steps=10,
+    optimize=True,
+    plot=True,
+    plot_path='sarima_forecast.png'
+)
+
+
+forecast_series = main_forecasting(
+    file_path='data/metrics.csv',
+    column_name='value',
+    model_type='exponential_smoothing',
+    steps=10,
+    optimize=True,
+    plot=True,
+    plot_path='exponential_smoothing_forecast.png'
+)
+
+"""
+"""
+Contributing:
+
+If you would like to contribute to the development of this package, please fork the repository and submit a pull request. For detailed instructions on contributing, please refer to the CONTRIBUTING.md file.
+
+"""
+
