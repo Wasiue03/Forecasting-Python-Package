@@ -19,8 +19,8 @@ class TestForecasting(unittest.TestCase):
             model_type='arima',
             steps=10,
             optimize=True,
-            plot=True,  # Set to True to display plot
-            plot_path=None  # None to always show plot
+            plot=True,  
+            plot_path=None  
         )
         self.assertIsNotNone(forecast_series, "Forecast series should not be None.")
 
@@ -43,8 +43,8 @@ class TestForecasting(unittest.TestCase):
             model_type='exponential_smoothing',
             steps=10,
             optimize=True,
-            plot=True,  # Set to True to display plot
-            plot_path=None  # None to always show plot
+            plot=True,  
+            plot_path=None  
         )
         self.assertIsNotNone(forecast_series, "Forecast series should not be None.")
     
@@ -69,7 +69,7 @@ class TestForecasting(unittest.TestCase):
         self.assertEqual(len(forecast_series), 10, "Forecast series length should be equal to steps.")
 
     def test_forecast_arima_invalid_parameters(self):
-        # Modify ARIMA parameters to test invalid cases (e.g., too short series)
+        
         short_series = pd.Series(range(5))
         forecast_series = forecast_arima(short_series, steps=2, optimize=False)
         self.assertIsNotNone(forecast_series, "Forecast series should not be None.")
@@ -88,7 +88,7 @@ class TestForecasting(unittest.TestCase):
         self.assertEqual(len(forecast_series), 10, "Forecast series length should be equal to steps.")
 
     def test_forecast_sarima_invalid_parameters(self):
-        # Modify SARIMA parameters to test invalid cases (e.g., too short series)
+        
         short_series = pd.Series(range(5))
         forecast_series = forecast_sarima(short_series, steps=2, optimize=False)
         self.assertIsNotNone(forecast_series, "Forecast series should not be None.")

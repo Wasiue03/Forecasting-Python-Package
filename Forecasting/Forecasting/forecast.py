@@ -36,10 +36,10 @@ def plot_forecast(series, forecast_series, title='Forecast', forecast_label='For
     plt.legend()
     
     if save_path:
-        plt.savefig(save_path)  # Save the plot to a file
-        plt.close()  # Close the figure to free up memory
+        plt.savefig(save_path)  
+        plt.close()  
     if not save_path or not os.path.exists(save_path):
-        plt.show()  # Show the plot on screen if not saving or if save path is invalid
+        plt.show()  
 
 
 # ARIMA forecasting function with optimization using Optuna
